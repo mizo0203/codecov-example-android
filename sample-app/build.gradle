@@ -2,45 +2,50 @@ apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
 
 android {
-  compileSdkVersion configCompileSdkVersion
-  buildToolsVersion configBuildToolsVersion
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
-  defaultConfig {
-    minSdkVersion 15
-    targetSdkVersion configTargetSdkVersion
-    versionCode 1
-    versionName project.version
-    testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-  }
-
-  productFlavors {
-    free {
-      applicationId 'com.dicedmelon.example.android.free'
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName project.version
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
-    paid {
-      applicationId 'com.dicedmelon.example.android'
-    }
-  }
 
-  buildTypes {
-    debug {
-      applicationIdSuffix '.debug'
-      versionNameSuffix '-debug'
-      testCoverageEnabled true
-    }
-  }
+    // https://qiita.com/mfks17/items/718bfb21b69d062fd8bf
+    flavorDimensions "environment"
 
-  dataBinding {
-    enabled = true
-  }
+    productFlavors {
+        free {
+            applicationId 'com.dicedmelon.example.android.free'
+            dimension "environment"
+        }
+        paid {
+            applicationId 'com.dicedmelon.example.android'
+            dimension "environment"
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-debug'
+            testCoverageEnabled true
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
-  compile support.appCompat
+    implementation 'com.android.support:appcompat-v7:28.0.0'
 
-  testCompile assertJCore
-  testCompile junit
+    testImplementation 'org.assertj:assertj-core:1.7.1'
+    testImplementation 'junit:junit:4.12'
 
-  androidTestCompile supportTest.espressoCore
-  androidTestCompile supportTest.rules
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
 }
