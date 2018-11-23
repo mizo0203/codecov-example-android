@@ -2,8 +2,9 @@ language: android
 jdk: oraclejdk8
 env:
   global:
-    - ANDROID_TARGET=android-25
-    - ANDROID_ABI=armeabi-v7a
+    # https://docs.travis-ci.com/user/languages/android/#ci-environment-for-android-projects
+    - ANDROID_TARGET=android-26
+    - ANDROID_ABI=x86
 android:
   components:
   - tools
