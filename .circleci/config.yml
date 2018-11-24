@@ -16,6 +16,8 @@ jobs:
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
+          environment:
+            TERM: dumb
       - save_cache:
           paths:
             - ~/.gradle
