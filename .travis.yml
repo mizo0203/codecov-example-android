@@ -19,7 +19,7 @@ before_install:
   - yes | sdkmanager "emulator"
 script:
   - ./gradlew build jacocoTestReport assembleAndroidTest
-  - echo no | avdmanager create avd --force -n test -k "system-images;android-${ANDROID_TARGET};google_apis_playstore;${ANDROID_ABI}"
+  - echo no | android create avd --force -n test -t "android-${ANDROID_TARGET}" --abi $ANDROID_ABI
   # https://stackoverflow.com/a/42581852
   - which emulator
   - /usr/local/android-sdk/tools/emulator -avd test -no-audio -no-window &
