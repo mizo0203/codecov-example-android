@@ -10,13 +10,12 @@ android:
   - platform-tools
   - build-tools-23.0.3
   - extra-android-m2repository
-  - ${ANDROID_TARGET}
-  - android-22
-  - sys-img-${ANDROID_ABI}-android-22
+  - $ANDROID_TARGET
+  - sys-img-${ANDROID_ABI}-google_apis-23
 # Emulator Management: Create, Start and Wait
 before_script:
   - android list targets
-  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --tag google_apis --abi $ANDROID_ABI
   - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
 script:
