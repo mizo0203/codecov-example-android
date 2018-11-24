@@ -17,6 +17,8 @@ android:
 before_install:
   # https://github.com/travis-ci/travis-ci/issues/8874#issuecomment-350350607
   - yes | sdkmanager "platforms;android-27"
+  # https://stackoverflow.com/questions/42554337/cannot-launch-avd-in-emulatorqt-library-not-found
+  - yes | sdkmanager "emulator"
   - android list targets
   - echo no | avdmanager create avd --force -n test -k "system-images;${ANDROID_TARGET};google_apis;${ANDROID_ABI}"
   - which emulator
