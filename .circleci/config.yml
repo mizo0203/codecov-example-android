@@ -15,7 +15,9 @@ jobs:
 #         command: sudo chmod +x ./gradlew
       - run:
           name: sdkmanager
-          command: sdkmanager "build-tools;23.0.3"
+          command: sdkmanager \
+            "build-tools;23.0.3" \
+            "system-images;android-22;default;armeabi-v7a"
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
@@ -28,6 +30,17 @@ jobs:
       - run:
           name: Run Tests
           command: ./gradlew lint test
+          environment:
+            TERM: dumb
+      - run:
+          name: Run Android Tests
+          command: |
+            ./gradlew build jacocoTestReport assembleAndroidTest
+            echo no | avdmanager create avd --force -n test -k "system-images;android-22;default;armeabi-v7a"
+            emulator -avd test -no-skin -no-audio -no-window &
+            android-wait-for-emulator
+            adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
+            ./gradlew connectedCheck
           environment:
             TERM: dumb
       - store_artifacts:
