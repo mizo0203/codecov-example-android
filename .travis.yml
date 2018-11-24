@@ -18,7 +18,7 @@ android:
 before_install:
   # https://github.com/travis-ci/travis-ci/issues/8874#issuecomment-350350607
   - yes | sdkmanager "platforms;android-27"
-  - yes | sdkmanager "system-images;android-27;default;${ANDROID_TARGET}"
+  - yes | sdkmanager "system-images;android-27;default;${ANDROID_ABI}"
 script:
   - android list targets
   # - ./gradlew build jacocoTestReport assembleAndroidTest
