@@ -8,20 +8,21 @@ android:
   components:
   - tools
   - platform-tools
-  - build-tools-27.0.3
-  - android-27
   - extra-google-google_play_services
   - extra-google-m2repository
   - extra-android-m2repository
-  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+  - $ANDROID_TARGET
+  - sys-img-${ANDROID_ABI}-google_apis-25
 before_install:
   # https://github.com/travis-ci/travis-ci/issues/8874#issuecomment-350350607
   - yes | sdkmanager "platforms;android-27"
-script:
-  - ./gradlew build jacocoTestReport assembleAndroidTest
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - android list targets
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi google_apis/$ANDROID_ABI
+  - which emulator
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
+script:
+  - ./gradlew build jacocoTestReport assembleAndroidTest
   - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
   - ./gradlew connectedCheck
 after_success:
