@@ -31,14 +31,25 @@ jobs:
           environment:
             TERM: dumb
       - run:
+          name: build jacocoTestReport assembleAndroidTest
+          command: ./gradlew build jacocoTestReport assembleAndroidTest
+          environment:
+            TERM: dumb
+      - run:
+          name: create avd
+          command: echo no | avdmanager create avd --force -n test -k "system-images;android-22;default;armeabi-v7a"
+      - run:
+          name: start emulator
+          command: emulator -avd test -no-skin -no-audio -no-window &
+      - run:
+          name: wait-for-device
+          command: adb wait-for-device
+      - run:
+          name: setprop
+          command: adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
+      - run:
           name: Run Android Tests
-          command: |
-            ./gradlew build jacocoTestReport assembleAndroidTest
-            echo no | avdmanager create avd --force -n test -k "system-images;android-22;default;armeabi-v7a"
-            emulator -avd test -no-skin -no-audio -no-window &
-            adb wait-for-device
-            adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
-            ./gradlew connectedCheck
+          command: ./gradlew connectedCheck
           environment:
             TERM: dumb
       - store_artifacts:
