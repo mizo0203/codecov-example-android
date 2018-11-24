@@ -11,14 +11,16 @@ android:
   - build-tools-23.0.3
   - extra-android-m2repository
   - ${ANDROID_TARGET}
-  - sys-img-${ANDROID_ABI}-google_apis-23
-script:
+  - android-22
+  - sys-img-${ANDROID_ABI}-android-22
+# Emulator Management: Create, Start and Wait
+before_script:
   - android list targets
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --tag google_apis --abi $ANDROID_ABI
+  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
   - emulator -avd test -no-audio -no-window &
+  - android-wait-for-emulator
+script:
   - # ./gradlew build jacocoTestReport assembleAndroidTest
-  - adb wait-for-device
-  - adb devices
   - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
   - ./gradlew connectedCheck
 after_success:
