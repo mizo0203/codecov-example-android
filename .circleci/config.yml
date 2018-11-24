@@ -15,9 +15,7 @@ jobs:
 #         command: sudo chmod +x ./gradlew
       - run:
           name: sdkmanager
-          command: sdkmanager \
-            "build-tools;23.0.3" \
-            "system-images;android-22;default;armeabi-v7a"
+          command: sdkmanager "build-tools;23.0.3" "system-images;android-22;default;armeabi-v7a"
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
