@@ -16,7 +16,7 @@ script:
   - android list targets
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --tag google_apis --abi $ANDROID_ABI
   - emulator -avd test -no-audio -no-window &
-  - ./gradlew build jacocoTestReport assembleAndroidTest
+  - # ./gradlew build jacocoTestReport assembleAndroidTest
   - adb wait-for-device
   - adb devices
   - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
