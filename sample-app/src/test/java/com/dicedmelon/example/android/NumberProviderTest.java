@@ -6,7 +6,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class NumberProviderTest {
 
-  @Test public void shouldProvideProperNumber() {
+  @Test
+  public void shouldProvideProperNumber() {
     // given
     NumberProvider numberProvider = new NumberProvider();
 
