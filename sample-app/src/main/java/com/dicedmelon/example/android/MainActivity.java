@@ -7,7 +7,8 @@ import com.dicedmelon.example.android.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
     ActivityMainBinding viewDataBinding =
