@@ -22,3 +22,5 @@ script:
   - ./gradlew connectedCheck
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+notifications:
+  slack: mizo0203:4uNIcz2s88PfBc93CdlNRo8O
