@@ -2,8 +2,8 @@ language: android
 jdk: oraclejdk8
 env:
   global:
-    - ANDROID_TARGET=26
-    - ANDROID_ABI=x86
+    - ANDROID_TARGET=android-22
+    - ANDROID_ABI=armeabi-v7a
 android:
   components:
   - tools
@@ -11,18 +11,15 @@ android:
   - extra-google-google_play_services
   - extra-google-m2repository
   - extra-android-m2repository
-  - sys-img-${ANDROID_ABI}-google_apis_playstore-${ANDROID_TARGET}
+  - $ANDROID_TARGET
+  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
 before_install:
   # https://github.com/travis-ci/travis-ci/issues/8874#issuecomment-350350607
   - yes | sdkmanager "platforms;android-27"
-  # https://stackoverflow.com/questions/42554337/cannot-launch-avd-in-emulatorqt-library-not-found
-  - yes | sdkmanager "emulator"
 script:
   - ./gradlew build jacocoTestReport assembleAndroidTest
-  - echo no | android create avd --force -n test -t "android-${ANDROID_TARGET}" --abi $ANDROID_ABI
-  # https://stackoverflow.com/a/42581852
-  - which emulator
-  - /usr/local/android-sdk/tools/emulator -avd test -no-audio -no-window &
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
   - ./gradlew connectedCheck
