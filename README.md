@@ -1,7 +1,9 @@
+# [Codecov](https://codecov.io) Android Example
 
 [![Build Status](https://travis-ci.org/mizo0203/example-android.svg?branch=master)](https://travis-ci.org/mizo0203/example-android)
 [![codecov](https://codecov.io/gh/mizo0203/example-android/branch/master/graph/badge.svg)](https://codecov.io/gh/mizo0203/example-android)
-# [Codecov](https://codecov.io) Android Example
+[![Maintainability](https://api.codeclimate.com/v1/badges/8acfc1daa546c3e72c48/maintainability)](https://codeclimate.com/github/mizo0203/example-android/maintainability)
+
 ## Guide
 #### Travis Setup
 If you use [Travis CI](https://travis-ci.org) as your continuous integration server you can
