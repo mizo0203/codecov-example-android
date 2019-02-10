@@ -1,6 +1,6 @@
 # [Codecov](https://codecov.io) Android Example
 
-[![Build Status](https://travis-ci.org/mizo0203/codecov-example-android.svg?branch=master)](https://travis-ci.org/mizo0203/codecov-example-android)
+[![Build Status](https://travis-ci.com/mizo0203/codecov-example-android.svg?branch=master)](https://travis-ci.com/mizo0203/codecov-example-android)
 [![codecov](https://codecov.io/gh/mizo0203/codecov-example-android/branch/master/graph/badge.svg)](https://codecov.io/gh/mizo0203/codecov-example-android)
 
 ## Guide
